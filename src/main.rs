@@ -8,7 +8,6 @@ fn main() {
     let desktop = home_dir().join("Desktop");
     let screenshots = find_files(&desktop, "Screenshot");
     let recordings = find_files(&desktop, "Screen Recording");
-
     let message = |name: &str, files: &Vec<PathBuf>| format!("moved {} {} to the {name} folder.", files.len(), ternary!(files.len() > 1, "files", "file").cyan()).bright_blue();
 
     if screenshots.is_empty() && recordings.is_empty() {
