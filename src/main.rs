@@ -1,28 +1,8 @@
+use crate::helpers::{find_files, home_dir, move_file};
+
 use colored::Colorize;
-use macros_rs::{string, ternary};
-use std::path::{Path, PathBuf};
-use std::{error::Error, fs};
-
-fn move_file(origin: &Path, new: &Path) -> Result<String, Box<dyn Error>> {
-    fs::rename(origin, new)?;
-    Ok(string!(new.file_name().unwrap().to_str().unwrap()))
-}
-
-fn home_dir() -> PathBuf {
-    match dirs::home_dir() {
-        Some(path) => path,
-        None => panic!("could not get the home directory!"),
-    }
-}
-
-fn find_files(path: &Path, contains: &str) -> Vec<PathBuf> {
-    fs::read_dir(path)
-        .expect("failed to read directory")
-        .filter_map(Result::ok)
-        .map(|entry| entry.path())
-        .filter(|path| path.is_file() && path.to_string_lossy().contains(contains))
-        .collect()
-}
+use macros_rs::ternary;
+use std::path::PathBuf;
 
 fn main() {
     let desktop = home_dir().join("Desktop");
@@ -63,3 +43,5 @@ fn main() {
         }
     }
 }
+
+mod helpers;
