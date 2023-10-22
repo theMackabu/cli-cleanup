@@ -1,0 +1,9 @@
+[package]
+name = "sc"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dirs = "5.0.1"
+colored = "2.0.4"
+macros-rs = "0.4.0"

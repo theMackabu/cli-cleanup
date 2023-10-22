@@ -1,0 +1,15 @@
+[project]
+name = "sc"
+version = "0.1.0"
+
+[tasks.build]
+info = "Build binaries"
+depends = ["clean"]
+script = [
+   "cargo zigbuild --release", 
+   "mv target/release/sc bin/sc",
+]
+
+[tasks]
+clean = { info = "Clean binary files", script = ["rm -rf bin", "mkdir bin"] }
+install = { info = "Move binary file", script = ["sudo cp bin/sc /usr/local/bin/sc", "echo Copied binary!"], depends = ["build"] }
